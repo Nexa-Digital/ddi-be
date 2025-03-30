@@ -63,12 +63,15 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
         Route::get('/history/{userid}', [ControllersAttendanceController::class, 'getHistory']);
         Route::post('/recap/{userid}', [ControllersAttendanceController::class, 'getUserRecap']);
         Route::post('/recap-all', [ControllersAttendanceController::class, 'getRecapAll']);
+        Route::post('/recap-all/export', [ControllersAttendanceController::class, 'exportRecapAll']);
     });
     
     Route::group(['prefix' => 'role'], function(){
         Route::get('/', [RoleController::class, 'index']);
     });
 });
+
+Route::post('/attendance/recap-all/export', [ControllersAttendanceController::class, 'exportRecapAll']);
 
 
 

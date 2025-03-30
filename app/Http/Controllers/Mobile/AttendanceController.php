@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Attendance;
 use App\Models\Schedule;
 use Carbon\Carbon;
+use Cloudinary\Api\Upload\UploadApi;
+use Cloudinary\Cloudinary;
+use Cloudinary\Configuration\Configuration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -45,25 +48,24 @@ class AttendanceController extends Controller
 
     public function store(Request $request){
 
-        $image = explode('base64,', $request->image);
-        $image = base64_decode($image[1]);
+        Configuration::instance('cloudinary://829686817882984:rKs9-GIUkoJNmOmlnOXSle5qT4c@davkbdap6');
 
-        if(!Storage::directoryExists('attendance')){
-            Storage::createDirectory('attendance');
-        }
+        $upload = new UploadApi();
 
-        $now = Carbon::now();
+        $file = $request->file('image');
 
-        $imageName = '/attendance/' . Str::slug($request->user()->name) . '/' . $now->format('d-m-Y--h:i').'.jpeg';
-
-        Storage::disk('public')->put($imageName, $image);
+        $image = $upload->upload($file->getRealPath(),[
+            'folder' => 'ddi-app/attendance',
+            'resource_type' => 'auto'
+        ]);
 
         $attendance = Attendance::create([
             'schedule_id' => $request->schedule_id,
             'location' => $request->location,
-            'image' => $imageName,
+            'image' => $image['url'],
             'lesson' => $request->lesson ?? ''
         ]);
+    
 
         return response()->json($attendance);
 

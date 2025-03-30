@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RecapExport;
 use App\Models\Attendance;
 use App\Models\Schedule;
 use Carbon\Carbon;
@@ -126,8 +127,6 @@ class AttendanceController extends Controller
 
     public function getRecapAll(Request $request){
 
-        Log::info($request->all());
-
         $recap = Schedule::when($request->role_id == 1, function($q) use ($request) {
             $q->whereHas('classRoom.instantion', function ($q) use ($request) {
                 $q->where('id', $request->instantion_id);
@@ -185,6 +184,11 @@ class AttendanceController extends Controller
 
         return response()->json($grouped);
         
+    }
+
+    public function exportRecapAll()
+    {
+        return (new RecapExport)->download('recap.xlsx');
     }
 
 }

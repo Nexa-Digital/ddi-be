@@ -33,6 +33,7 @@ class UserController extends Controller
     public function show($id){
         $user = $this->repository->find($id);
         $user->roles;
+        $user->role_id = $user->roles->pluck('id');
         return response()->json($user);
     }
 
@@ -50,8 +51,10 @@ class UserController extends Controller
     }
 
     public function update($id, Request $request){
-        $this->repository->update($id, $request->all());
-        return response()->json(null, 201);
+        $body = $request->except('role_id', 'password');
+        $data = $this->repository->update($id, $body);
+        $data->roles()->sync($request->role_id);
+        return response()->json($data, 201);
     }
 
     public function delete($id){
