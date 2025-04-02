@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\RecapExport;
+use App\Exports\RecapUserExport;
 use App\Models\Attendance;
 use App\Models\Schedule;
 use Carbon\Carbon;
@@ -66,14 +67,6 @@ class AttendanceController extends Controller
     }
 
     public function getUserRecap($userid,Request $request){
-
-        // $recap = Schedule::whereHas('classRoom.instantion', function ($q) use ($request) {
-        //     $q->where('id', $request->instantionid);
-        // })
-        // ->where('user_id', $userid)
-        // ->where('date', '>=', $request->start)
-        // ->where('date', '<=', $request->end)
-        // ->get();
 
         $recap = Schedule::when($request->role_id == 1, function($q) use ($request) {
             $q->whereHas('classRoom.instantion', function ($q) use ($request) {
@@ -189,6 +182,11 @@ class AttendanceController extends Controller
     public function exportRecapAll()
     {
         return (new RecapExport)->download('recap.xlsx');
+    }
+
+    public function exportRecapUser()
+    {
+        return (new RecapUserExport)->download('recap_user.xlsx');
     }
 
 }

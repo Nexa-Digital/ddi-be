@@ -71,6 +71,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     });
 });
 
+Route::post('/attendance/recap/{userid}/export', [ControllersAttendanceController::class, 'exportRecapUser']);
 Route::post('/attendance/recap-all/export', [ControllersAttendanceController::class, 'exportRecapAll']);
 
 

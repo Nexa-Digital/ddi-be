@@ -13,10 +13,10 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        server: www.genexa.digital
+        server: www.absensi-ddimattoanging.com
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /public_html/absen-be/
+        server-dir: /public_html/be/
         exclude: |
           **/.git*
           **/.git*/**

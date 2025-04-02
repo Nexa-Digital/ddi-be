@@ -12,13 +12,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
-use PhpOffice\PhpSpreadsheet\Style\Border;
-use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class RecapExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize, WithEvents
 {
@@ -27,7 +21,6 @@ class RecapExport implements FromCollection, WithHeadings, WithMapping, ShouldAu
 
     public function collection()
     {
-        // Disini kita panggil fungsi getRecapAll dan kirimkan request yang diperlukan
         $request = request();
         $recap = Schedule::when($request->role_id == 1, function($q) use ($request) {
             $q->whereHas('classRoom.instantion', function ($q) use ($request) {
@@ -38,8 +31,6 @@ class RecapExport implements FromCollection, WithHeadings, WithMapping, ShouldAu
         ->whereDate('date', '>=', $request->start)
         ->whereDate('date', '<=', $request->finish)
         ->get();
-
-        Log::info('sf');
 
         $grouped = $recap
         ->map(function ($e) {
