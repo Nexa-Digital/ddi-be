@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AttendanceController as ControllersAttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassRoomController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InstantionController;
 use App\Http\Controllers\Mobile\AttendanceController;
 use App\Http\Controllers\Mobile\AuthController as MobileAuthController;
@@ -20,6 +21,9 @@ Route::get('/user', function (Request $request) {
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => 'auth:sanctum'], function(){
+
+    Route::get('/dashboard', DashboardController::class);
+
     Route::group(['prefix' => 'instantion'], function(){
         Route::get('/', [InstantionController::class, 'index']);
         Route::get('/all', [InstantionController::class, 'all']);
