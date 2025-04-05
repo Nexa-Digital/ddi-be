@@ -31,21 +31,45 @@ abstract class BaseRepository implements RepositoryInterface
   {
     $query = $this->model->query();
 
+    // foreach ($filters as $filter) {
+    //   if (isset($filter['field']) && isset($filter['operator']) && isset($filter['value'])) {
+    //     if (is_array($filter['value'])) {
+    //       if (strtoupper($filter['operator']) === 'IN') {
+    //         $query->whereIn($filter['field'], $filter['value']);
+    //       } elseif (strtoupper($filter['operator']) === 'NOT IN') {
+    //         $query->whereNotIn($filter['field'], $filter['value']);
+    //       }
+    //     } else {
+    //       if (strtoupper($filter['operator']) === 'OR') {
+    //         $query->orWhere($filter['field'], $filter['value']);
+    //       } else {
+    //         $query->where($filter['field'], $filter['operator'], $filter['value']);
+    //       }
+    //     }
+    //   }
+    // }
+
     foreach ($filters as $filter) {
       if (isset($filter['field']) && isset($filter['operator']) && isset($filter['value'])) {
-        if (is_array($filter['value'])) {
-          if (strtoupper($filter['operator']) === 'IN') {
-            $query->whereIn($filter['field'], $filter['value']);
-          } elseif (strtoupper($filter['operator']) === 'NOT IN') {
-            $query->whereNotIn($filter['field'], $filter['value']);
-          }
-        } else {
-          if (strtoupper($filter['operator']) === 'OR') {
-            $query->orWhere($filter['field'], $filter['value']);
+          $operator = strtoupper($filter['operator']);
+          $field = $filter['field'];
+          $value = $filter['value'];
+  
+          if (is_array($value)) {
+              if ($operator === 'IN') {
+                  $query->whereIn($field, $value);
+              } elseif ($operator === 'NOT IN') {
+                  $query->whereNotIn($field, $value);
+              }
           } else {
-            $query->where($filter['field'], $filter['operator'], $filter['value']);
+              if ($operator === 'OR') {
+                  $query->orWhere($field, $value); // asumsi operator OR di sini berarti OR EQUALS
+              } elseif ($operator === 'LIKE' || $operator === 'NOT LIKE') {
+                  $query->where($field, $operator, "%$value%");
+              } else {
+                  $query->where($field, $operator, $value);
+              }
           }
-        }
       }
     }
 
