@@ -183,7 +183,7 @@ class RecapUserExport implements FromCollection, WithHeadings, WithEvents, WithD
             $drawing->setName('Gambar Absen');
             $drawing->setDescription('Gambar Absen');
             $drawing->setImageResource($imageResource);
-            $drawing->setHeight($height);
+            $drawing->setHeight(300);
             $drawing->setWidth(100);
             $drawing->setRenderingFunction(MemoryDrawing::RENDERING_JPEG);
             $drawing->setMimeType(MemoryDrawing::MIMETYPE_DEFAULT);
