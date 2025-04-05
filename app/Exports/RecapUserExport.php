@@ -138,7 +138,7 @@ class RecapUserExport implements FromCollection, WithHeadings, WithEvents, WithD
                 $highestRow = $sheet->getHighestRow();
                 for ($row = 2; $row <= $highestRow; $row++) {
 
-                    $sheet->getRowDimension($row)->setRowHeight(60 + 2);
+                    $sheet->getRowDimension($row)->setRowHeight(300 + 2);
 
                     $link = $sheet->getCell("A$row")->getValue();
                     if ($link != '-') {
