@@ -53,6 +53,9 @@ class UserController extends Controller
     public function update($id, Request $request){
         $body = $request->except('role_id', 'password');
         $data = $this->repository->update($id, $body);
+        if($request->password){
+            $this->repository->update($id, ['password' => $request->password]);
+        }
         $data->roles()->sync($request->role_id);
         return response()->json($data, 201);
     }
