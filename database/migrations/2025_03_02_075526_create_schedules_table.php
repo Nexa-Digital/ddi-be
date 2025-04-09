@@ -19,6 +19,7 @@ return new class extends Migration
             $table->time('start');
             $table->time('finish');
             $table->integer('amount');
+            $table->integer('teaching_hour');
             $table->unsignedBigInteger('role_id')->nullable();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('CASCADE');
             $table->unsignedBigInteger('class_room_id')->nullable();

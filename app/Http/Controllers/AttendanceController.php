@@ -99,7 +99,7 @@ class AttendanceController extends Controller
                 'class' => $instantion,
                 'start' => $start->translatedFormat('H:i'),
                 'finish' => $end->translatedFormat('H:i'),
-                'duration' => $start->diffInHours($end),
+                'duration' => $e->teaching_hour,
                 'check_in' => $e->attendance ? $checkin->translatedFormat('H:i') : null,
                 'attendance' => $e->attendance,
             ];
@@ -153,7 +153,7 @@ class AttendanceController extends Controller
                 'class' => $instantion,
                 'start' => $start->translatedFormat('H:i'),
                 'finish' => $end->translatedFormat('H:i'),
-                'duration' => $start->diffInHours($end),
+                'duration' => $e->teaching_hour,
                 'check_in' => $e->attendance ? $checkin->translatedFormat('H:i') : null,
                 'attendance' => $e->attendance,
             ];

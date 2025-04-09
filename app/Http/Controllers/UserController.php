@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->query('per_page', 10);
-        $filters = $request->query('filters', []);
+        $filters = $request->query('filter', []);
         $users = $this->repository->paginate($perPage, $filters);
 
         return response()->json($users);

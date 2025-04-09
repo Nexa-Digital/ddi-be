@@ -34,14 +34,10 @@ class RecapExport implements FromCollection, WithHeadings, WithMapping, ShouldAu
 
         $grouped = $recap
         ->map(function ($e) {
-            $start = Carbon::parse($e->start);
-            $end = Carbon::parse($e->finish);
-            $duration = $start->diffInHours($end);
-
             return [
                 'user' => $e->user->name,
                 'date' => $e->date,
-                'duration' => $duration,
+                'duration' => $e->teaching_hour,
                 'attendance' => $e->attendance,
             ];
         })

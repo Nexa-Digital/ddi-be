@@ -75,6 +75,7 @@ class ScheduleController extends Controller
                             'start' => $request->start,
                             'finish' => $request->finish,
                             'amount' => $request->amount,
+                            'teaching_hour' => $request->teaching_hour,
                             'role_id' => $request->role_id,
                             'class_room_id' => $request->class_room_id,
                             'user_id' => $request->user_id,
