@@ -130,7 +130,7 @@ class RecapUserExport implements FromCollection, WithHeadings, WithEvents, WithD
                 $sheet->getColumnDimension('E')->setWidth(25);
                 $sheet->getColumnDimension('G')->setWidth(25);
                 $sheet->getColumnDimension('H')->setWidth(25);
-                $sheet->getColumnDimension('I')->setWidth(30);
+                $sheet->getColumnDimension('I')->setWidth(120);
 
                 // foreach ($this->images as $img) {
                 //     $rowIndex = $img['row'];
@@ -154,7 +154,7 @@ class RecapUserExport implements FromCollection, WithHeadings, WithEvents, WithD
                         // $sheet->getStyle("A$row")->getFont()->getColor()->setRGB('0000FF'); // Warna biru
                     }
 
-                    $sheet->getStyle("A$row:G$row")->applyFromArray([
+                    $sheet->getStyle("A$row:I$row")->applyFromArray([
                         'alignment' => [
                             'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
                             'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
