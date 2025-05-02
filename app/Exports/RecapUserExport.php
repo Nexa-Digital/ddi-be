@@ -76,6 +76,8 @@ class RecapUserExport implements FromCollection, WithHeadings, WithEvents, WithD
                 'finish' => $end->translatedFormat('H:i'),
                 'duration' => $e->teaching_hour,
                 'check_in' => $e->attendance ? $checkin->translatedFormat('H:i') : 'Tidak Masuk',
+                'description' => $e->attendance?->lesson ?? '-',
+                'location' => $e->attendance?->location ?? '-',
             ];
         })
         ->values()
@@ -87,7 +89,7 @@ class RecapUserExport implements FromCollection, WithHeadings, WithEvents, WithD
     public function headings(): array
     {
         return [
-            'Gambar', 'Tanggal', 'Kelas', 'Jadwal Masuk', 'Jadwal Keluar', 'Total Jam', 'Waktu Absen'
+            'Gambar', 'Tanggal', 'Kelas', 'Jadwal Masuk', 'Jadwal Keluar', 'Total Jam', 'Waktu Absen', 'Keterangan', 'Lokasi'
         ];
     }
 
