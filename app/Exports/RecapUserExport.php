@@ -130,7 +130,7 @@ class RecapUserExport implements FromCollection, WithHeadings, WithEvents, WithD
                 $sheet->getColumnDimension('E')->setWidth(25);
                 $sheet->getColumnDimension('G')->setWidth(25);
                 $sheet->getColumnDimension('H')->setWidth(25);
-                $sheet->getColumnDimension('I')->setWidth(100);
+                $sheet->getColumnDimension('I')->setWidth(80);
 
                 // foreach ($this->images as $img) {
                 //     $rowIndex = $img['row'];
