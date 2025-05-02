@@ -102,7 +102,7 @@ class RecapUserExport implements FromCollection, WithHeadings, WithEvents, WithD
                 // Menebalkan baris judul
                 // $sheet->getStyle('A1:E1')->getFont()->setBold(true);
 
-                $sheet->getStyle('A1:G1')->applyFromArray([
+                $sheet->getStyle('A1:I1')->applyFromArray([
                     'font' => [
                         'bold' => true,
                         'color' => ['rgb' => 'FFFFFF'],
@@ -129,6 +129,8 @@ class RecapUserExport implements FromCollection, WithHeadings, WithEvents, WithD
                 $sheet->getColumnDimension('D')->setWidth(25);
                 $sheet->getColumnDimension('E')->setWidth(25);
                 $sheet->getColumnDimension('G')->setWidth(25);
+                $sheet->getColumnDimension('H')->setWidth(25);
+                $sheet->getColumnDimension('I')->setWidth(30);
 
                 // foreach ($this->images as $img) {
                 //     $rowIndex = $img['row'];
